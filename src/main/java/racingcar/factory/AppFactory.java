@@ -1,22 +1,22 @@
 package racingcar.factory;
 
 import racingcar.controller.RacingCarController;
+import racingcar.service.DelimiterService;
 import racingcar.service.InputService;
-import racingcar.view.InputView;
-import racingcar.view.OutputView;
+import racingcar.service.RacingService;
 
 public class AppFactory {
-    private final InputView inputView;
-    private final OutputView outputView;
     private final InputService inputService;
+    private final DelimiterService delimiterService;
+    private final RacingService racingService;
 
     public AppFactory() {
-        this.inputView = new InputView();
-        this.outputView = new OutputView();
         this.inputService = new InputService();
+        this.delimiterService = new DelimiterService();
+        this.racingService = new RacingService();
     }
 
     public RacingCarController settingRacingCarController() {
-        return new RacingCarController(inputView, outputView, inputService);
+        return new RacingCarController(inputService, delimiterService, racingService);
     }
 }
