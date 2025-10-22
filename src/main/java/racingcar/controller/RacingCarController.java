@@ -1,26 +1,41 @@
 package racingcar.controller;
 
+import racingcar.service.DelimiterService;
 import racingcar.service.InputService;
-import racingcar.view.InputView;
-import racingcar.view.OutputView;
+import racingcar.service.RacingService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RacingCarController {
-    private final InputView inputView;
-    private final OutputView outputView;
     private final InputService inputService;
+    private final DelimiterService delimiterService;
+    private final RacingService racingService;
 
-    public RacingCarController(InputView inputView, OutputView outputView, InputService inputService) {
-        this.inputView = inputView;
-        this.outputView = outputView;
+
+    public RacingCarController(InputService inputService, DelimiterService delimiterService, RacingService racingService ) {
         this.inputService = inputService;
+        this.delimiterService = delimiterService;
+        this.racingService = racingService;
     }
 
     public void runRacingCar() {
-        inputView.printNameInputUI();
+        List<String> carNameList = getNameListWithSplit();
+        List<String> winnerList = getTryResultWithRacing();
+
+        // TODO: Print Result
+    }
+
+    private List<String> getNameListWithSplit() {
         String user_name_input = inputService.readNameInput();
+
+        return delimiterService.splitDelimiter(user_name_input);
+    }
+
+    private List<String> getTryResultWithRacing() {
         String user_try_input = inputService.readTryInput();
 
-        outputView.printResultOutputUI();
-        outputView.printWinnerOutputUI();
+        // TODO: Return winner List
+        return new ArrayList<>();
     }
 }
