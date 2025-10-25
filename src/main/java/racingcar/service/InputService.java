@@ -5,31 +5,28 @@ import racingcar.view.InputView;
 
 import java.util.NoSuchElementException;
 
-import static racingcar.util.Validator.validateEmptyInput;
-
 public class InputService {
-    public String readNameInput() {
+    public String readCarNameInput() {
         InputView.printNameInputUI();
 
-        return checkEmptyInput();
+        return readInput();
     }
 
     public String readTryInput() {
         InputView.printTryInputUI();
 
-        return checkEmptyInput();
+        return readInput();
     }
 
-    private String checkEmptyInput() {
-        String user_input;
+    private String readInput() {
+        String userInput;
 
         try {
-            user_input = Console.readLine();
+            userInput = Console.readLine();
         } catch (NoSuchElementException e) {
-            user_input = "";
+            userInput = "";
         }
-        validateEmptyInput(user_input);
 
-        return user_input;
+        return userInput;
     }
 }
