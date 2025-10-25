@@ -1,48 +1,42 @@
 package racingcar.controller;
 
-import racingcar.service.ExtractCarNameService;
 import racingcar.service.InputService;
 import racingcar.service.RacingService;
+import racingcar.view.OutputView;
 
 import java.util.List;
 
 import static racingcar.util.Validator.*;
 
-public class RacingCarController {
+public class RacingController {
     private final InputService inputService;
-    private final ExtractCarNameService extractCarNameService;
     private final RacingService racingService;
 
-    // TODO: 도메인 패키지 구조로 하자~
-    public RacingCarController(InputService inputService, ExtractCarNameService extractCarNameService, RacingService racingService) {
+    public RacingController(InputService inputService, RacingService racingService) {
         this.inputService = inputService;
-        this.extractCarNameService = extractCarNameService;
         this.racingService = racingService;
     }
 
-    public void runRacingCar() {
-        String carNameInput = inputService.readCarNameInput();
+    public void runRacingCar(List<String> carNameList) {
         String tryInput = inputService.readTryInput();
-
-        List<String> carNameList = extractCarNameService.extractCarName(carNameInput);
-
-        carNameValidation(carNameInput, carNameList);
         tryValidation(tryInput);
 
         racingService.setupCarNameList(carNameList);
-        racingService.getCarInfoList();
 
+        OutputView.printResultOutputUI();
+        for(int i = 0; i < Integer.parseInt(tryInput); i++) {
+            racingService.roundStart();
+        }
 
+        List<String> winnerList = racingService.findWinner();
 
+        OutputView.printWinnerOutputUI();
+        System.out.println(String.join(", ", winnerList));
     }
 
-
-    private void carNameValidation(String carNameInput, List<String> carNameList) {
-        validateEmptyInput(carNameInput);
-        validateCarName(carNameList);
-    }
 
     private void tryValidation(String tryInput) {
+        validateEmptyInput(tryInput);
         validateTryInput(tryInput);
     }
 }
