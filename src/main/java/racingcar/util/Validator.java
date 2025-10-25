@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Validator {
+// TODO: 기존의 static 버려야 할 듯
+public class Validation {
     private static final int Limited_Name_Length = 5;
     private static final String REGEXP_EXCEPT_CHAR_NUM = "[^a-zA-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ]";
 
