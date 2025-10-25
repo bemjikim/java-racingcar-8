@@ -6,14 +6,25 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-// TODO: 기존의 static 버려야 할 듯
-public class Validation {
+public class Validator {
     private static final int Limited_Name_Length = 5;
     private static final String REGEXP_EXCEPT_CHAR_NUM = "[^a-zA-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ]";
 
     public static void validateEmptyInput(String user_input){
         if (user_input.isEmpty()) {
             throw new IllegalArgumentException(ErrorMessageTemplate.INVALID_EMPTY_INPUT.getMessage());
+        }
+    }
+
+    public static void validateTryInput(String tryInput) {
+        try {
+            int tryNumber = Integer.parseInt(tryInput);
+
+            if (tryNumber <= 0) {
+                throw new IllegalArgumentException(ErrorMessageTemplate.INVALID_SMALLER_THAN_ZERO.getMessage());
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(ErrorMessageTemplate.INVALID_NONE_NUMBER.getMessage());
         }
     }
 
