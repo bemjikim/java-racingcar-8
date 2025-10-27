@@ -1,6 +1,7 @@
 package racingcar.dto;
 
 public class CarList {
+    private static final int MOVING_FORWARD = 4;
     private final String name;
     private int moveCount;
 
@@ -9,11 +10,15 @@ public class CarList {
         this.moveCount = moveCount;
     }
 
-    public void moveFoward() {
+    public void moveForward() {
         this.moveCount++;
     }
 
-    public void moveBackward() {}
+    public void checkMoveForward(int randomNumber) {
+        if (randomNumber >= MOVING_FORWARD) {
+            moveForward();
+        }
+    }
 
     public String getName() {
         return name;
