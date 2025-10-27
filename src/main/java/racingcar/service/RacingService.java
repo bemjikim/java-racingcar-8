@@ -2,16 +2,14 @@ package racingcar.service;
 
 import racingcar.dto.CarList;
 import racingcar.enums.ErrorMessageTemplate;
+import racingcar.util.RandomNumberGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static racingcar.util.RandomNumberGenerator.generateRandomNumber;
-
 public class RacingService {
 
     private List<CarList> carInfoList;
-    private static final int MOVING_FORWARD = 4;
     private static final String MOVING_MARK = "-";
 
     public void setupCarNameList(List<String> carNameList){
@@ -26,14 +24,11 @@ public class RacingService {
         return new CarList(name, moveCount);
     }
 
-    public void roundStart() {
+    public void roundStart(RandomNumberGenerator generator) {
         for(CarList carList : carInfoList) {
-            int randomNumber = generateRandomNumber();
+            int randomNumber = generator.generate();
 
-            if(randomNumber >= MOVING_FORWARD) {
-                carList.moveFoward();
-            }
-
+            carList.checkMoveForward(randomNumber);
             roundBroadcasting(carList);
         }
         System.out.println();
@@ -56,6 +51,4 @@ public class RacingService {
 
         return winnerList;
     }
-
-
 }
