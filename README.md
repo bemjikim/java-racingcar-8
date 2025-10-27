@@ -159,7 +159,6 @@
 >> 
 >> [ X ] John, jay와 같이 구분자 뒤에 공백이 존재한다면, 공백을 제거하고 이름을 추출 
 >>          
->>      Stream.of(user_input.split(delimiter)).map(String::trim).toArray(String[]::new)
 >> ### 예외처리
 >>
 >> [ X ] 자동차 이름에 영어, 한국어, 숫자를 제외한 문자인지에 대한 예외처리
